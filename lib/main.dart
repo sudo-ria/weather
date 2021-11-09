@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -10,12 +11,12 @@ class WeatherApp extends StatefulWidget {
 }
 
 class _WeatherAppState extends State<WeatherApp> {
-  int temperature = 0;
+  int temp = 0;
   double air_pressure = 0;
-  double humidity = 0;
+  int humidity = 0;
   String location = 'London';
   int woeid = 44418;
-  String weather = 'clear';
+  //String weather = 'clear';
 
   String searchApiUrl =
       'https://www.metaweather.com/api/location/search/?query=';
@@ -38,10 +39,10 @@ class _WeatherAppState extends State<WeatherApp> {
     var data = consolidated_weather[0];
 
     setState(() {
-      temperature = data['the_temp'].round();
+      temp = data['the_temp'].round();
       air_pressure = data['air_pressure'];
       humidity = data['humidity'];
-      weather = data["weather_state_name"].replaceAll(' ', '').toLowerCase();
+     // weather = data["weather_state_name"].replaceAll(' ', '').toLowerCase();
     });
   }
 
@@ -71,7 +72,7 @@ class _WeatherAppState extends State<WeatherApp> {
                         children: <Widget>[
                           Center(
                             child: Text(
-                              temperature.toString() + ' °C',
+                              temp.toString() + ' °C',
                               style: TextStyle(
                                   color: Colors.white, fontSize: 60.0),
                             ),
@@ -116,7 +117,7 @@ class _WeatherAppState extends State<WeatherApp> {
                               style:
                                   TextStyle(color: Colors.white, fontSize: 25),
                               decoration: InputDecoration(
-                                hintText: 'Search location...',
+                                hintText: 'Enter city...',
                                 hintStyle: TextStyle(
                                     color: Colors.white, fontSize: 18.0),
                                 prefixIcon:
