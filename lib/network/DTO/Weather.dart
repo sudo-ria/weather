@@ -3,7 +3,7 @@ class Weather {
   final double air_pressure;
   final int humidity;
   final String location;
-  final int woeid;
+  final int locId;
 
 
   Weather(
@@ -11,7 +11,7 @@ class Weather {
       this.air_pressure,
       this.humidity,
       this.location,
-      this.woeid
+      this.locId
       );
 
   Weather.fromJson(Map<String, dynamic> json)
@@ -19,14 +19,14 @@ class Weather {
   air_pressure = json['air_pressure'],
   humidity = json['humidity'],
   location = json['title'],
-  woeid = json['woeid'];
+  locId = json['woeid'];
 
   Map<String, dynamic> toJson() => {
     'the_temp' : temp,
     'air_pressure' : air_pressure,
     'humidity' : humidity,
     'title' : location,
-    'woeid' : woeid
+    'woeid' : locId
   };
 
 }

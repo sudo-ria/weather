@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../network/WeatherService.dart';
+import '../network/DTO/Weather.dart';
+
 void main() => runApp(WeatherApp());
 
 class WeatherApp extends StatefulWidget {
@@ -15,7 +18,7 @@ class _WeatherAppState extends State<WeatherApp> {
   double air_pressure = 0;
   int humidity = 0;
   String location = 'London';
-  int woeid = 44418;
+  int locId = 44418;
   //String weather = 'clear';
 
   String searchApiUrl =
@@ -28,12 +31,12 @@ class _WeatherAppState extends State<WeatherApp> {
 
       setState(() {
         location = result["title"];
-        woeid = result["woeid"];
+        locId = result["woeid"];
       });
   }
 
   void fetchLocation() async {
-    var locationResult = await http.get(Uri.parse(locationApiUrl + woeid.toString()));
+    var locationResult = await http.get(Uri.parse(locationApiUrl + locId.toString()));
     var result = json.decode(locationResult.body);
     var consolidated_weather = result["consolidated_weather"];
     var data = consolidated_weather[0];
