@@ -28,5 +28,4 @@ class Weather {
     'title' : location,
     'woeid' : locId
   };
-
 }

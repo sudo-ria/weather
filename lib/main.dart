@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import '../ui/WeatherApp.dart';
 
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-import '../network/WeatherService.dart';
-import '../network/DTO/Weather.dart';
-
-void main() => runApp(WeatherApp());
-
-class WeatherApp extends StatefulWidget {
-  @override
-  _WeatherAppState createState() => _WeatherAppState();
+void main() {
+  runApp(MyApp());
 }
 
-class _WeatherAppState extends State<WeatherApp> {
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'WeatherApp',
+      home: new WeatherApp(),
+    );
+  }
+}
+
+/*class WeatherApp extends StatefulWidget {
+  @override
+  _WeatherAppState createState() => _WeatherAppState();
+}*/
+
+/*class _WeatherAppState extends State<WeatherApp> {
   int temp = 0;
   double air_pressure = 0;
   int humidity = 0;
@@ -135,4 +144,4 @@ class _WeatherAppState extends State<WeatherApp> {
                 )),
     );
   }
-}
+}*/
