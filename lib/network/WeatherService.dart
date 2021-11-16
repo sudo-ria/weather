@@ -31,7 +31,9 @@ Future<Weather> getWeather(int locId) async {
 
  Future<Weather> fetchWeather(String city) async {
    //final cities = await http.get(Uri.parse(locationUrl));
-   final locId = await getCity(city) as int ;
-   return getWeather(locId);
+   final cities = await getCity(city);
+   final cityId = cities[0].woeid;
+   // TO DO добавить проверку на пустой спиок городов
+   return getWeather(cityId);
  }
 }

@@ -1,5 +1,5 @@
 class Weather {
-  final int temp;
+  final double temp;
   final double air_pressure;
   final int humidity;
   final String location;

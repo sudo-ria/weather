@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:weatherapp/network/DTO/Weather.dart';
 import 'dart:convert';
 
-import '../network/WeatherService.dart' as network;
-import '../network/DTO/Weather.dart' as network;
+import 'package:weatherapp/network/WeatherService.dart';
+
+//import '../network/WeatherService.dart' as network;
+//import '../network/DTO/Weather.dart' as network;
 
 class WeatherApp extends StatefulWidget {
   @override
@@ -13,13 +16,14 @@ class WeatherApp extends StatefulWidget {
 
 class _WeatherAppState extends State<WeatherApp> {
 
-  Future<String> weatherData;
+  Weather weatherData;
+  WeatherService weatherService = new WeatherService();
 
   get temp => null;
 
   get air_pressure => null;
 
-  String get location => null;
+  String get location => '';
 
   get humidity => null;
   /*int temp = 0;
@@ -66,7 +70,11 @@ class _WeatherAppState extends State<WeatherApp> {
   @override
   void initState() {
     super.initState();
-    weatherData = fetchWeather();
+    initWeather();
+  }
+  //выполняет получение инф-ции о погоде по названию города
+  void initWeather() async {
+    final weather = await weatherService.fetchWeather('moscow');
   }
 
   /*void weatherData() async {
@@ -178,6 +186,5 @@ class _WeatherAppState extends State<WeatherApp> {
   }
 
 }
-
 
 
