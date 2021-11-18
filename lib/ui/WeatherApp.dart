@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:weatherapp/network/DTO/Weather.dart';
-import 'dart:convert';
-
-import 'package:weatherapp/network/WeatherService.dart';
-
-//import '../network/WeatherService.dart' as network;
-//import '../network/DTO/Weather.dart' as network;
+import '../network/WeatherService.dart';
+import '../network/DTO/Weather.dart';
 
 class WeatherApp extends StatefulWidget {
   @override
@@ -16,21 +9,28 @@ class WeatherApp extends StatefulWidget {
 
 class _WeatherAppState extends State<WeatherApp> {
 
-  Weather weatherData;
+ Future<Weather> weatherData;
   WeatherService weatherService = new WeatherService();
 
-  get temp => null;
+  /*get temp => null;
 
   get air_pressure => null;
 
   String get location => '';
 
-  get humidity => null;
-  /*int temp = 0;
+  get humidity => null;*/
+  double temp = 0;
   double air_pressure = 0;
   int humidity = 0;
-  String location = 'London';
-  int locId = 44418;*/
+  String location = '';
+  int locId = 44418;
+
+
+  get result => null;
+
+  get data => null;
+
+
 
   /*String searchApiUrl =
       'https://www.metaweather.com/api/location/search/?query=';
@@ -74,19 +74,27 @@ class _WeatherAppState extends State<WeatherApp> {
   }
   //выполняет получение инф-ции о погоде по названию города
   void initWeather() async {
-    final weather = await weatherService.fetchWeather('moscow');
+    final weatherData = await weatherService.fetchWeather('moscow');
+    print(weatherData.toString());
+    setState(() {
+      // location = result["title"];
+      // locId = result["woeid"];
+      // temp = data['the_temp'].round();
+      // air_pressure = data['air_pressure'];
+      // humidity = data['humidity'];
+    });
   }
 
-  /*void weatherData() async {
+  void weather() async {
     location = result["title"];
     locId = result["woeid"];
     temp = data['the_temp'].round();
     air_pressure = data['air_pressure'];
     humidity = data['humidity'];
-  }*/
+  }
 
-  /*void onTextFieldSubmitted(String input) {
-    fetchWeatherr(input);
+ /* void onTextFieldSubmitted(String input) {
+    fetchWeather(input);
   }*/
 
 
@@ -103,9 +111,9 @@ class _WeatherAppState extends State<WeatherApp> {
           ),
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: FutureBuilder<String>(
+            body: FutureBuilder<Weather>(
               future: weatherData,
-                builder: (BuildContext context, AsyncSnapshot<String> snapshot){
+                builder: (BuildContext context, AsyncSnapshot<Weather> snapshot){
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting: return Text('Loading....');
                     default:
@@ -159,9 +167,9 @@ class _WeatherAppState extends State<WeatherApp> {
                                 Container(
                                   width: 300,
                                   child: TextField(
-                                    onSubmitted: (String input) {
-                                      //onTextFieldSubmitted(input);
-                                    },
+                                   /* onSubmitted: (String input) {
+                                      onTextFieldSubmitted(input);
+                                    },*/
                                     style:
                                     TextStyle(color: Colors.white, fontSize: 25),
                                     decoration: InputDecoration(

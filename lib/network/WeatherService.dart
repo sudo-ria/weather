@@ -6,8 +6,6 @@ import '../network/DTO/City.dart';
 
 
 class WeatherService{
-  //String get locationUrl => null;
-
 
  Future<List<City>> getCity(String city) async {
     final locationUrl = 'https://www.metaweather.com/api/location/search/?query=$city';
@@ -30,10 +28,9 @@ Future<Weather> getWeather(int locId) async {
 }
 
  Future<Weather> fetchWeather(String city) async {
-   //final cities = await http.get(Uri.parse(locationUrl));
    final cities = await getCity(city);
    final cityId = cities[0].woeid;
-   // TO DO добавить проверку на пустой спиок городов
+   // TODO: добавить проверку на пустой спиcок городов
    return getWeather(cityId);
  }
 }
