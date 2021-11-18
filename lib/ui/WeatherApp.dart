@@ -8,28 +8,20 @@ class WeatherApp extends StatefulWidget {
 }
 
 class _WeatherAppState extends State<WeatherApp> {
-
- Future<Weather> weatherData;
+  Future<Weather> weather;
+  Weather weatherData = new Weather(0,0,0,'',44418);
   WeatherService weatherService = new WeatherService();
 
-  /*get temp => null;
-
+  get temp => null;
   get air_pressure => null;
-
   String get location => '';
+  get humidity => null;
 
-  get humidity => null;*/
-  double temp = 0;
+  /*double temp = 0;
   double air_pressure = 0;
   int humidity = 0;
   String location = '';
-  int locId = 44418;
-
-
-  get result => null;
-
-  get data => null;
-
+  int locId = 44418;*/
 
 
   /*String searchApiUrl =
@@ -74,26 +66,26 @@ class _WeatherAppState extends State<WeatherApp> {
   }
   //выполняет получение инф-ции о погоде по названию города
   void initWeather() async {
-    final weatherData = await weatherService.fetchWeather('moscow');
-    print(weatherData.toString());
-    setState(() {
-      // location = result["title"];
-      // locId = result["woeid"];
-      // temp = data['the_temp'].round();
-      // air_pressure = data['air_pressure'];
-      // humidity = data['humidity'];
-    });
+    final weather = await weatherService.fetchWeather('Moscow');
+    print(weather.toString());
+   /* setState(() {
+      location = result["title"];
+      locId = result["woeid"];
+      temp = weather['the_temp'].round();
+        air_pressure = weather['air_pressure'];
+        humidity = weather['humidity'];
+    });*/
   }
 
-  void weather() async {
+  /*void weatherData() async {
     location = result["title"];
     locId = result["woeid"];
-    temp = data['the_temp'].round();
-    air_pressure = data['air_pressure'];
-    humidity = data['humidity'];
-  }
+    temp = weather['the_temp'].round();
+    air_pressure = weather['air_pressure'];
+    humidity = weather['humidity'];
+  }*/
 
- /* void onTextFieldSubmitted(String input) {
+  /*void onTextFieldSubmitted(String input) {
     fetchWeather(input);
   }*/
 
@@ -112,7 +104,7 @@ class _WeatherAppState extends State<WeatherApp> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: FutureBuilder<Weather>(
-              future: weatherData,
+              future: weather,
                 builder: (BuildContext context, AsyncSnapshot<Weather> snapshot){
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting: return Text('Loading....');
@@ -167,7 +159,7 @@ class _WeatherAppState extends State<WeatherApp> {
                                 Container(
                                   width: 300,
                                   child: TextField(
-                                   /* onSubmitted: (String input) {
+                                    /*onSubmitted: (String input) {
                                       onTextFieldSubmitted(input);
                                     },*/
                                     style:

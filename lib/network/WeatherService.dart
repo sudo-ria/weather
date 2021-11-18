@@ -20,7 +20,7 @@ class WeatherService{
 
 Future<Weather> getWeather(int locId) async {
   final url = 'https://www.metaweather.com/api/location/$locId';
-  final response = await http.get(Uri.parse(url));
+  final response = await http.get(Uri.parse(url + locId.toString()));
   final json = jsonDecode(response.body);
   final weather = Weather.fromJson(json["consolidated_weather"][0]);
   return weather;
