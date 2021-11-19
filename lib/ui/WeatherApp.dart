@@ -9,13 +9,13 @@ class WeatherApp extends StatefulWidget {
 
 class _WeatherAppState extends State<WeatherApp> {
   Future<Weather> weather;
-  Weather weatherData = new Weather(0,0,0,'',44418);
+  Weather weatherData = Weather(0,0,0,'',44418);
   WeatherService weatherService = new WeatherService();
 
-  get temp => null;
-  get air_pressure => null;
-  String get location => '';
-  get humidity => null;
+  // get temp => null;
+  // get air_pressure => null;
+  // get location => '';
+  // get humidity => null;
 
   /*double temp = 0;
   double air_pressure = 0;
@@ -63,26 +63,37 @@ class _WeatherAppState extends State<WeatherApp> {
   void initState() {
     super.initState();
     initWeather();
+    //updateWeather(weatherData);
   }
   //выполняет получение инф-ции о погоде по названию города
   void initWeather() async {
     final weather = await weatherService.fetchWeather('Moscow');
     print(weather.toString());
-   /* setState(() {
-      location = result["title"];
-      locId = result["woeid"];
-      temp = weather['the_temp'].round();
-        air_pressure = weather['air_pressure'];
-        humidity = weather['humidity'];
-    });*/
+    setState(() {
+      weatherData.location;
+      weatherData.woeid;
+      weatherData.temp.round();
+      weatherData.air_pressure;
+      weatherData.humidity;
+    });
+
+   // setState(() {
+   //    location = result["title"];
+   //    locId = result["woeid"];
+   //    temp = weather['the_temp'].round();
+   //    air_pressure = weather['air_pressure'];
+   //    humidity = weather['humidity'];
+   //  });
   }
 
-  /*void weatherData() async {
-    location = result["title"];
-    locId = result["woeid"];
-    temp = weather['the_temp'].round();
-    air_pressure = weather['air_pressure'];
-    humidity = weather['humidity'];
+  /*void updateWeather(Weather weatherData) async {
+  setState(() {
+    weatherData.location;
+    weatherData.woeid;
+    weatherData.temp.round();
+    weatherData.air_pressure;
+    weatherData.humidity;
+  });
   }*/
 
   /*void onTextFieldSubmitted(String input) {
@@ -120,14 +131,16 @@ class _WeatherAppState extends State<WeatherApp> {
                               children: <Widget>[
                                 Center(
                                   child: Text(
-                                    temp.toString() + ' °C',
+                                    weatherData.temp.toString() + ' °C',
+                                   // temp.toString() + ' °C',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 60.0),
                                   ),
                                 ),
                                 Center(
                                   child: Text(
-                                    location,
+                                    weatherData.location,
+                                    //location,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 40.0),
                                   ),
@@ -138,14 +151,16 @@ class _WeatherAppState extends State<WeatherApp> {
                                   children: [
                                     Center(
                                       child: Text(
-                                        air_pressure.toString() + ' mb',
+                                        weatherData.air_pressure.toString() + ' mb',
+                                        //air_pressure.toString() + ' mb',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 30.0),
                                       ),
                                     ),
                                     Center(
                                       child: Text(
-                                        humidity.toString() + ' %',
+                                        weatherData.humidity.toString() + ' %',
+                                        //humidity.toString() + ' %',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 30.0),
                                       ),
