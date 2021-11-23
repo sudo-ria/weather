@@ -9,20 +9,15 @@ class WeatherApp extends StatefulWidget {
 
 class _WeatherAppState extends State<WeatherApp> {
   Future<Weather> weather;
-  Weather weatherData = Weather(0,0,0,'',44418);
-  WeatherService weatherService = new WeatherService();
+  //Weather weatherData = Weather(0,0,0,' ',44418);
+  WeatherService weatherService = WeatherService();
 
-  // get temp => null;
-  // get air_pressure => null;
-  // get location => '';
-  // get humidity => null;
 
   /*double temp = 0;
   double air_pressure = 0;
   int humidity = 0;
   String location = '';
   int locId = 44418;*/
-
 
   /*String searchApiUrl =
       'https://www.metaweather.com/api/location/search/?query=';
@@ -64,19 +59,11 @@ class _WeatherAppState extends State<WeatherApp> {
     super.initState();
     initWeather();
     //updateWeather(weatherData);
+    //weatherService.fetchWeather('Moscow');
   }
   //выполняет получение инф-ции о погоде по названию города
-  void initWeather() async {
-    final weather = await weatherService.fetchWeather('Moscow');
-    print(weather.toString());
-    setState(() {
-      weatherData.location;
-      weatherData.woeid;
-      weatherData.temp.round();
-      weatherData.air_pressure;
-      weatherData.humidity;
-    });
-
+  void initWeather() {
+    weather = weatherService.fetchWeather('Moscow');
    // setState(() {
    //    location = result["title"];
    //    locId = result["woeid"];
@@ -85,19 +72,22 @@ class _WeatherAppState extends State<WeatherApp> {
    //    humidity = weather['humidity'];
    //  });
   }
+  // 1. создать метод, который будет обраб-ть введенную юзером строку из поля
+  // 2. необходимо вызывать fetchWeather и передавать в качестве аргумента строку, которую ввел юзер на шаге 1
+  // 3. добавить обработку для ситуации, когда город не найден
 
-  /*void updateWeather(Weather weatherData) async {
+ /* void updateWeather(Weather weatherData) async {
   setState(() {
-    weatherData.location;
-    weatherData.woeid;
-    weatherData.temp.round();
-    weatherData.air_pressure;
-    weatherData.humidity;
+    location = weatherData.location;
+    locId =  weatherData.woeid;
+    temp = weatherData.temp.round();
+    air_pressure = weatherData.air_pressure;
+    humidity = weatherData.humidity;
   });
   }*/
 
   /*void onTextFieldSubmitted(String input) {
-    fetchWeather(input);
+    weatherService.fetchWeather(input);
   }*/
 
 
@@ -121,7 +111,11 @@ class _WeatherAppState extends State<WeatherApp> {
                     case ConnectionState.waiting: return Text('Loading....');
                     default:
                       if (snapshot.hasError)
-                        return Text('Error');
+                        return Text(
+                          'Error',
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 30.0),
+                        );
                       else
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -131,7 +125,8 @@ class _WeatherAppState extends State<WeatherApp> {
                               children: <Widget>[
                                 Center(
                                   child: Text(
-                                    weatherData.temp.toString() + ' °C',
+                                    snapshot.data.temp.toString() + ' °C',
+                                    //weatherData.temp.toString() + ' °C',
                                    // temp.toString() + ' °C',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 60.0),
@@ -139,7 +134,8 @@ class _WeatherAppState extends State<WeatherApp> {
                                 ),
                                 Center(
                                   child: Text(
-                                    weatherData.location,
+                                    'asd',
+                                    //snapshot.data.location,
                                     //location,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 40.0),
@@ -151,7 +147,7 @@ class _WeatherAppState extends State<WeatherApp> {
                                   children: [
                                     Center(
                                       child: Text(
-                                        weatherData.air_pressure.toString() + ' mb',
+                                        snapshot.data.air_pressure.toString() + ' mb',
                                         //air_pressure.toString() + ' mb',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 30.0),
@@ -159,7 +155,7 @@ class _WeatherAppState extends State<WeatherApp> {
                                     ),
                                     Center(
                                       child: Text(
-                                        weatherData.humidity.toString() + ' %',
+                                        snapshot.data.humidity.toString() + ' %',
                                         //humidity.toString() + ' %',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 30.0),

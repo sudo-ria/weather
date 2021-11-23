@@ -10,5 +10,4 @@ class City {
   City.fromJson(Map<String, dynamic> json)
       : title = json['title'],
         woeid = json['woeid'];
-
 }

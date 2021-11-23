@@ -19,13 +19,14 @@ class WeatherService{
 }
 
 Future<Weather> getWeather(int locId) async {
-  final url = 'https://www.metaweather.com/api/location/$locId';
-  final response = await http.get(Uri.parse(url + locId.toString()));
+  final url = 'https://www.metaweather.com/api/location/$locId/';
+  final response = await http.get(Uri.parse(url));
   final json = jsonDecode(response.body);
+  // TODO добавить проверку на успешный вызов апи(200 ок)
   final weather = Weather.fromJson(json["consolidated_weather"][0]);
   return weather;
-
 }
+
 
  Future<Weather> fetchWeather(String city) async {
    final cities = await getCity(city);
@@ -33,4 +34,5 @@ Future<Weather> getWeather(int locId) async {
    // TODO: добавить проверку на пустой спиcок городов
    return getWeather(cityId);
  }
+
 }
