@@ -12,13 +12,6 @@ class _WeatherAppState extends State<WeatherApp> {
   //Weather weatherData = Weather(0,0,0,' ',44418);
   WeatherService weatherService = WeatherService();
 
-
-  /*double temp = 0;
-  double air_pressure = 0;
-  int humidity = 0;
-  String location = '';
-  int locId = 44418;*/
-
   /*String searchApiUrl =
       'https://www.metaweather.com/api/location/search/?query=';
   String locationApiUrl = 'https://www.metaweather.com/api/location/';*/
@@ -86,10 +79,12 @@ class _WeatherAppState extends State<WeatherApp> {
   });
   }*/
 
-  /*void onTextFieldSubmitted(String input) {
-    weatherService.fetchWeather(input);
-  }*/
-
+  void onTextFieldSubmitted(String city) async {
+    setState(() {
+      weather = weatherService.fetchWeather(city);
+    });
+      //weatherService.fetchWeather(city);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,13 +103,22 @@ class _WeatherAppState extends State<WeatherApp> {
               future: weather,
                 builder: (BuildContext context, AsyncSnapshot<Weather> snapshot){
                   switch (snapshot.connectionState) {
-                    case ConnectionState.waiting: return Text('Loading....');
+                    case ConnectionState.waiting:
+                      return Center(
+                       child: Text(
+                          'Loading...',
+                        style: TextStyle(
+                            color: Colors.white, fontSize: 30.0),
+                      ),
+                    );
                     default:
                       if (snapshot.hasError)
-                        return Text(
-                          'Error',
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 30.0),
+                        return Center(
+                          child: Text(
+                            'Error',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 30.0),
+                          ),
                         );
                       else
                         return Column(
@@ -134,8 +138,8 @@ class _WeatherAppState extends State<WeatherApp> {
                                 ),
                                 Center(
                                   child: Text(
-                                    'asd',
-                                    //snapshot.data.location,
+                                    //'asd',
+                                    snapshot.data.location!=null?snapshot.data.location:'',
                                     //location,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 40.0),
@@ -170,9 +174,9 @@ class _WeatherAppState extends State<WeatherApp> {
                                 Container(
                                   width: 300,
                                   child: TextField(
-                                    /*onSubmitted: (String input) {
-                                      onTextFieldSubmitted(input);
-                                    },*/
+                                    onSubmitted: (String city) {
+                                      onTextFieldSubmitted(city);
+                                    },
                                     style:
                                     TextStyle(color: Colors.white, fontSize: 25),
                                     decoration: InputDecoration(
@@ -191,8 +195,8 @@ class _WeatherAppState extends State<WeatherApp> {
                   }
                 }
             ),
-
-          )),
+          ),
+      ),
     );
   }
 
