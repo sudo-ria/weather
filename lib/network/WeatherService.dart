@@ -23,6 +23,11 @@ Future<Weather> getWeather(int locId) async {
   final response = await http.get(Uri.parse(url));
   final json = jsonDecode(response.body);
   // TODO добавить проверку на успешный вызов апи(200 ок)
+  if (response.statusCode == 200) {
+    return Weather.fromJson(json["consolidated_weather"][0]);
+  }  else if(response.statusCode != 200){
+    throw Exception('Failed to load');
+  }
   final weather = Weather.fromJson(json["consolidated_weather"][0]);
   return weather;
 }
@@ -32,6 +37,9 @@ Future<Weather> getWeather(int locId) async {
    final cities = await getCity(city);
    final cityId = cities[0].woeid;
    // TODO: добавить проверку на пустой спиcок городов
+   if (cityId == null){
+     throw Exception('city not found');
+   }
    return getWeather(cityId);
  }
 

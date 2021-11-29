@@ -56,7 +56,7 @@ class _WeatherAppState extends State<WeatherApp> {
   }
   //выполняет получение инф-ции о погоде по названию города
   void initWeather() {
-    weather = weatherService.fetchWeather('Moscow');
+    weather = weatherService.fetchWeather('London');
    // setState(() {
    //    location = result["title"];
    //    locId = result["woeid"];
@@ -130,8 +130,6 @@ class _WeatherAppState extends State<WeatherApp> {
                                 Center(
                                   child: Text(
                                     snapshot.data.temp.toString() + ' °C',
-                                    //weatherData.temp.toString() + ' °C',
-                                   // temp.toString() + ' °C',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 60.0),
                                   ),
@@ -139,8 +137,8 @@ class _WeatherAppState extends State<WeatherApp> {
                                 Center(
                                   child: Text(
                                     //'asd',
+                                    //snapshot.data.location,
                                     snapshot.data.location!=null?snapshot.data.location:'',
-                                    //location,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 40.0),
                                   ),
@@ -152,7 +150,6 @@ class _WeatherAppState extends State<WeatherApp> {
                                     Center(
                                       child: Text(
                                         snapshot.data.air_pressure.toString() + ' mb',
-                                        //air_pressure.toString() + ' mb',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 30.0),
                                       ),
@@ -160,7 +157,6 @@ class _WeatherAppState extends State<WeatherApp> {
                                     Center(
                                       child: Text(
                                         snapshot.data.humidity.toString() + ' %',
-                                        //humidity.toString() + ' %',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 30.0),
                                       ),
