@@ -55,7 +55,7 @@ class _WeatherAppState extends State<WeatherApp> {
     //weatherService.fetchWeather('Moscow');
   }
   //выполняет получение инф-ции о погоде по названию города
-  void initWeather() {
+  void initWeather()  {
     weather = weatherService.fetchWeather('London');
    // setState(() {
    //    location = result["title"];

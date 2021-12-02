@@ -24,7 +24,7 @@ Future<Weather> getWeather(int locId) async {
   final json = jsonDecode(response.body);
   // TODO добавить проверку на успешный вызов апи(200 ок)
   if (response.statusCode == 200) {
-    return Weather.fromJson(json["consolidated_weather"][0]);
+    return Weather.fromJson(jsonDecode(response.body));
   }  else if(response.statusCode != 200){
     throw Exception('Failed to load');
   }
