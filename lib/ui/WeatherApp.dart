@@ -129,16 +129,16 @@ class _WeatherAppState extends State<WeatherApp> {
                               children: <Widget>[
                                 Center(
                                   child: Text(
-                                    snapshot.data.temp.toString() + ' °C',
+                                  ' ${snapshot.data.consolidatedWeather[0].theTemp.toStringAsFixed(1) + ' °C'}',
+                                   // snapshot.data.temp.toString() + ' °C',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 60.0),
                                   ),
                                 ),
                                 Center(
                                   child: Text(
-                                    //'asd',
-                                    //snapshot.data.location,
-                                    snapshot.data.location!=null?snapshot.data.location:'',
+                                    ' ${snapshot.data.title}',
+                                    //snapshot.data.title!=null?snapshot.data.title:'',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 40.0),
                                   ),
@@ -149,14 +149,16 @@ class _WeatherAppState extends State<WeatherApp> {
                                   children: [
                                     Center(
                                       child: Text(
-                                        snapshot.data.air_pressure.toString() + ' mb',
+                                        ' ${snapshot.data.consolidatedWeather[0].airPressure.toString() + 'mb'}',
+                                        //snapshot.data.air_pressure.toString() + ' mb',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 30.0),
                                       ),
                                     ),
                                     Center(
                                       child: Text(
-                                        snapshot.data.humidity.toString() + ' %',
+                                        ' ${snapshot.data.consolidatedWeather[0].humidity.toString() + ' %'}',
+                                        //snapshot.data.humidity.toString() + ' %',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 30.0),
                                       ),
